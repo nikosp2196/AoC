@@ -7,12 +7,10 @@ export function readFileAndParse(filePath: string, delimiter: string): {list1: n
     try {
         const data = fs.readFileSync(filePath, 'utf8');
         const lines = data.trim().split('\n');
-
         lines.forEach((line, index) => {
-            const temp: string[] = line.split(delimiter);
-
+            const temp: string[] = line.replace("\r", "").split(delimiter);
             list1.push(Number(temp[0]));
-            list1.push(Number(temp[1]));
+            list2.push(Number(temp[1]));
         })
     } catch (error) {
         console.error('Error reading the file:', error);
